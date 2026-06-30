@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ album.title }} - Photo Album Manager{% endblock %}
+
+{% block content %}
+<div class="album-detail-header">
+    <a href="/" class="btn btn-secondary">&larr; Back to Albums</a>
+    <h2>{{ album.title }}</h2>
+    <span class="album-date">{{ album.date }}</span>
+</div>
+
+<div class="album-actions">
+    <form id="upload-form" method="post" enctype="multipart/form-data" action="/api/albums/{{ album.id }}/photos">
+        <label class="btn btn-primary">
+            Add Photos
+            <input type="file" name="file" accept="image/*" multiple style="display:none" id="photo-upload-input">
+        </label>
+    </form>
+</div>
+
+{% if photos %}
+    <div class="photo-grid" id="photo-grid">
+        {% for photo in photos %}
+            {% include "photo_tile.html" %}
+        {% endfor %}
+    </div>
+{% else %}
+    {% with title="No photos yet", message="Add photos to this album to get started." %}
+        {% include "empty_state.html" %}
+    {% endwith %}
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/photo-grid.js"></script>
+{% endblock %}

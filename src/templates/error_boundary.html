@@ -1,0 +1,6 @@
+<div class="error-boundary" role="alert">
+    <div class="error-icon">&#9888;</div>
+    <h2 class="error-title">Something went wrong</h2>
+    <p class="error-message">{{ error_message|default("An unexpected error occurred. Please try again.") }}</p>
+    <button class="btn btn-secondary" onclick="location.reload()">Reload Page</button>
+</div>

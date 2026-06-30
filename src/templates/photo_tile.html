@@ -1,0 +1,4 @@
+<div class="photo-tile" data-photo-id="{{ photo.id }}">
+    <img src="/data/photos/{{ photo.album_id }}/{{ photo.filename }}" alt="{{ photo.original_name }}" loading="lazy">
+    <button class="delete-btn" data-photo-id="{{ photo.id }}" title="Delete photo">&times;</button>
+</div>

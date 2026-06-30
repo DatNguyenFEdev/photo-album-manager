@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Photo Album Manager{% endblock %}
+
+{% block content %}
+<div class="album-actions">
+    <button class="btn btn-primary" onclick="openCreateAlbum()">+ Create Album</button>
+</div>
+{% include "create_album.html" %}
+{% if date_groups %}
+    {% for group in date_groups %}
+    <section class="date-group">
+        <h2 class="date-group-heading">{{ group.label }}</h2>
+        <div class="album-grid" data-date-prefix="{{ group.date_prefix }}">
+            {% for album in group.albums %}
+                {% include "album_card.html" %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+{% else %}
+    {% with title="No albums yet", message="Create your first album to start organizing your photos.", action_url="#", action_label="Create Album" %}
+        {% include "empty_state.html" %}
+    {% endwith %}
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/album-list.js"></script>
+{% endblock %}
